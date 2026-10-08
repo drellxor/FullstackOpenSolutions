@@ -3,9 +3,13 @@ const Header = (props) => {
   return (<h1>{props.course}</h1>)
 }
 
+const Part = ( { item }) => {
+  return (<p>{item.part} {item.exercise}</p>)
+}
+
 const Content = ({ items }) => {
   return (items.map(item => (
-      <p key={item.part}>{item.part} {item.exercise}</p>
+      <Part key={item.part} item={item}/>
   )))
 }
 
