@@ -7,18 +7,26 @@ const IncButton = (props) => (<button onClick={() => props.callFunc(props.callVa
 const StatRow = ({ text, value, afterText }) => (<p>{text} {value} {afterText}</p>)
 
 const Statistics = ({ good, neutral, bad}) => {
-    const total = good + neutral + bad
-    return (
-      <div>
-        <Header text='statistics'/>
+  const total = good + neutral + bad
+  let content = (<StatRow text='No feedback given'/>)
+  if (total > 0) {
+    content = (
+      <>
         <StatRow text='good' value={good}/>
         <StatRow text='neutral' value={neutral}/>
         <StatRow text='bad' value={bad}/>
         <StatRow text='all' value={total}/>
         <StatRow text='average' value={(good - bad) / total}/>
         <StatRow text='positive' value={good / total} afterText='%'/>
-      </div>
+      </>
     )
+  }
+  return (
+    <div>
+      <Header text='statistics'/>
+      {content}
+    </div>
+  )
 }
 
 const App = () => {
