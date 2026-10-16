@@ -6,6 +6,21 @@ const IncButton = (props) => (<button onClick={() => props.callFunc(props.callVa
 
 const StatRow = ({ text, value, afterText }) => (<p>{text} {value} {afterText}</p>)
 
+const Statistics = ({ good, neutral, bad}) => {
+    const total = good + neutral + bad
+    return (
+      <div>
+        <Header text='statistics'/>
+        <StatRow text='good' value={good}/>
+        <StatRow text='neutral' value={neutral}/>
+        <StatRow text='bad' value={bad}/>
+        <StatRow text='all' value={total}/>
+        <StatRow text='average' value={(good - bad) / total}/>
+        <StatRow text='positive' value={good / total} afterText='%'/>
+      </div>
+    )
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -18,13 +33,7 @@ const App = () => {
       <IncButton callFunc={setGood} callValue={good} text='Good'/>
       <IncButton callFunc={setNeutral} callValue={neutral} text='Neutral'/>
       <IncButton callFunc={setBad} callValue={bad} text='Bad'/>
-      <Header text='statistics'/>
-      <StatRow text='good' value={good}/>
-      <StatRow text='neutral' value={neutral}/>
-      <StatRow text='bad' value={bad}/>
-      <StatRow text='all' value={good + neutral + bad}/>
-      <StatRow text='average' value={(good - bad) / (good + neutral + bad)}/>
-      <StatRow text='positive' value={good / (good + neutral + bad)} afterText='%'/>
+      <Statistics bad={bad} good={good} neutral={neutral}/>
     </div>
   )
 }
