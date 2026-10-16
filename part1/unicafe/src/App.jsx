@@ -4,20 +4,29 @@ const Header = ({ text }) => (<h1>{text}</h1>)
 
 const IncButton = (props) => (<button onClick={() => props.callFunc(props.callValue + 1)}>{props.text}</button>)
 
-const StatRow = ({ text, value, afterText }) => (<p>{text} {value} {afterText}</p>)
+const StatRow = ({ text, value, afterText }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value} {afterText}</td>
+  </tr>
+)
 
 const Statistics = ({ good, neutral, bad}) => {
   const total = good + neutral + bad
-  let content = (<StatRow text='No feedback given'/>)
+  let content = (<p>No feedback given</p>)
   if (total > 0) {
     content = (
       <>
-        <StatRow text='good' value={good}/>
-        <StatRow text='neutral' value={neutral}/>
-        <StatRow text='bad' value={bad}/>
-        <StatRow text='all' value={total}/>
-        <StatRow text='average' value={(good - bad) / total}/>
-        <StatRow text='positive' value={good / total} afterText='%'/>
+        <table>
+          <tbody>
+            <StatRow text='good' value={good}/>
+            <StatRow text='neutral' value={neutral}/>
+            <StatRow text='bad' value={bad}/>
+            <StatRow text='all' value={total}/>
+            <StatRow text='average' value={(good - bad) / total}/>
+            <StatRow text='positive' value={good / total} afterText='%'/>
+          </tbody>
+        </table>
       </>
     )
   }
