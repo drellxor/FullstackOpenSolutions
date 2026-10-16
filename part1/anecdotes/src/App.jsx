@@ -9,6 +9,17 @@ const ButtonRandomSelect = ({ setter, list }) => {
   )
 }
 
+const ButtonVote = ({ setter, votes, voteIndex }) => {
+  const newVotes = {...votes}
+  newVotes[voteIndex]++
+
+  return (
+    <button onClick={() => setter(newVotes)}>vote</button>
+  )
+}
+
+const DisplayVotes = ({ voteCount }) => (<p>Has {voteCount} votes</p>)
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -21,12 +32,17 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
+  const defaultVotes = Object.fromEntries(
+    anecdotes.map((_, i) => [i, 0])
+  )
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(defaultVotes)
 
   return (
     <div>
       {anecdotes[selected]}
-      <br/>
+      <DisplayVotes voteCount={votes[selected]}/>
+      <ButtonVote setter={setVotes} votes={votes} voteIndex={selected}/>
       <ButtonRandomSelect setter={setSelected} list={anecdotes}/>
     </div>
   )
