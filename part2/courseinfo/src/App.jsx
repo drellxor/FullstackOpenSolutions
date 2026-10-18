@@ -1,39 +1,5 @@
-const Header1 = ({ text }) => {
-  return (<h1>{text}</h1>)
-}
-
-const Header2 = ({ text }) => {
-  console.log(text)
-  return (<h2>{text}</h2>)
-}
-
-const Part = ( { item }) => {
-  return (<p>{item.name} {item.exercises}</p>)
-}
-
-const Content = ({ items }) => {
-  return (items.map(item => (
-      <Part key={item.id} item={item}/>
-  )))
-}
-
-const Total = ({ items }) => {
-  return (
-      <p>
-        Number of exercises: {items.reduce((sum, item) => { return sum + item.exercises }, 0)}
-      </p>
-  )
-}
-
-const Course = ( { name, parts }) => {
-  return (
-    <div>
-      <Header2 text={name}/>
-      <Content items={parts}/>
-      <Total items={parts}/>
-    </div>
-  )
-}
+import Course from './components/Course.jsx'
+import { Header1 } from "./components/Header.jsx";
 
 const App = () => {
   const courses = [
