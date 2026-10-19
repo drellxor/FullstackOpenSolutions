@@ -12,7 +12,11 @@ const App = () => {
       <form onSubmit={(event) => {
         event.preventDefault()
         if (newName !== '') {
-          setPersons(persons.concat({name: newName}))
+          if (persons.find(person => person.name === newName) !== undefined) {
+            alert(`${newName} is already added to phonebook`)
+          } else {
+            setPersons(persons.concat({name: newName}))
+          }
         }
       }}>
         <div>
